@@ -27,8 +27,13 @@ def handle_add_task(task):
     add_task_ui(task)
 
 def take_input():
-    task = askstring('Task', "Enter your task.")
-    handle_add_task(task)
+    task = task_entry.get()
+    if task != "":
+        handle_add_task(task)
+        task_entry.delete(0, "end")
+        return
+    print("Error.")
+
 
 
 # Header frame to hold the header objects.
@@ -46,12 +51,13 @@ task_frame.grid(row=1, column=0, sticky="nsew")
 # Footer frame.
 footer_frame = Frame(window, width=600, bg="#f3f3f3", )
 footer_frame.grid(row=2, column=0, sticky="nsew")
+footer_frame.grid_columnconfigure(0, weight=1)
 # Task Entry.
 task_entry = Entry(footer_frame, font=("Arial", 20))
-task_entry.pack(ipady=10, fill="x", expand=True)
+task_entry.grid(ipady=10, row=2, column=0, sticky="ew")
 
-add_task_button = Button(footer_frame, text="+", width=4, height=1, font=("Arial", 16), command=take_input)
-add_task_button.pack(side="right", )
+add_task_button = Button(footer_frame, text="+", width=4, font=("Arial", 16), command=take_input)
+add_task_button.grid(row=2, column=1, sticky="e", ipady=10)
 
 
 # Start the main loop.
