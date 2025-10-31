@@ -17,24 +17,33 @@ display_label.grid(row=0, column=0, sticky="nsew", padx=10, columnspan=4)
 
 # Application logic.
 
-# Global variable to store the expression.
-expression=""
+# Global variables.
+expression="0"
+operators_tup = ("+", "-", "/", "*")
 
 def build_expression(exp):
     global expression
+    if expression != "0":
+        if expression[-1] in operators_tup and exp in operators_tup:
+            expression = expression[:-1]
+    else:
+        expression = ""
     expression = expression + str(exp)
 
 def evaluate_expression():
-    global expression
-    operators_tup = ("+", "-", "/", "*")
-    if expression.startswith(operators_tup) or expression.endswith(operators_tup):
+    try:
+        return eval(expression)
+    except ZeroDivisionError:
+        return "ZERO DIVISION"
+    except SyntaxError:
         return "SYNTAX ERROR"
-    return eval(expression)
 
 def update_entry():
+    temp_exp = expression.replace("*", "x")
+
     display_label.config(state="normal")
     display_label.delete(0, "end")
-    display_label.insert(0, expression)
+    display_label.insert(0, temp_exp)
     display_label.config(state="disabled")
 
 def handle_equals():
@@ -44,14 +53,15 @@ def handle_equals():
     update_entry()
 
 def handle_button_click(op):
-    global expression
     build_expression(op)
     update_entry()
 
 def handle_clear():
     global expression
-    expression=""
+    expression="0"
     update_entry()
+
+update_entry()
 
 # Buttons
 # First row
