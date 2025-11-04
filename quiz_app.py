@@ -194,8 +194,6 @@ def render_questions_frame():
     answers_frame = ttk.Frame(mcq_frame)
     answers_frame.pack(fill="x", expand=True)
 
-
-
     option_1 = ttk.Radiobutton(answers_frame, text=options[0], value=options[0], variable=selected_option, style="Custom.TRadiobutton")
     option_2 = ttk.Radiobutton(answers_frame, text=options[1], value=options[1], variable=selected_option, style="Custom.TRadiobutton")
     option_3 = ttk.Radiobutton(answers_frame, text=options[2], value=options[2], variable=selected_option, style="Custom.TRadiobutton")
@@ -248,7 +246,6 @@ def handle_next_button():
 
 next_button = ttk.Button(footer_frame, text="NEXT", style="Custom.TButton", command=handle_next_button)
 next_button.pack(side="right")
-
 
 # Start the main loop
 window.mainloop()
