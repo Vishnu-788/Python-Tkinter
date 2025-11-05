@@ -54,6 +54,7 @@ def render_asking_frame(guess):
 
     curr_frame=asking_frame
 
+
 def render_success_frame():
     destroy_curr_frame()
     success_frame = ttk.Frame(main_frame)

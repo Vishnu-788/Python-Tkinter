@@ -72,56 +72,6 @@ questions_options_dictionary = {
         "options": ["Thermometer", "Barometer", "Hygrometer", "Altimeter"],
         "answer": "Barometer"
     },
-    11: {
-        "question": "Who discovered gravity when an apple fell from a tree?",
-        "options": ["Albert Einstein", "Isaac Newton", "Galileo Galilei", "Nikola Tesla"],
-        "answer": "Isaac Newton"
-    },
-    12: {
-        "question": "Which continent is known as the 'Dark Continent'?",
-        "options": ["Asia", "Europe", "Africa", "Australia"],
-        "answer": "Africa"
-    },
-    13: {
-        "question": "How many sides does a hexagon have?",
-        "options": ["5", "6", "7", "8"],
-        "answer": "6"
-    },
-    14: {
-        "question": "Which organ in the human body pumps blood?",
-        "options": ["Brain", "Heart", "Lungs", "Liver"],
-        "answer": "Heart"
-    },
-    15: {
-        "question": "Which language has the most native speakers worldwide?",
-        "options": ["English", "Spanish", "Mandarin Chinese", "Hindi"],
-        "answer": "Mandarin Chinese"
-    },
-    16: {
-        "question": "What is the hardest natural substance on Earth?",
-        "options": ["Iron", "Gold", "Diamond", "Platinum"],
-        "answer": "Diamond"
-    },
-    17: {
-        "question": "Which is the fastest land animal?",
-        "options": ["Lion", "Cheetah", "Horse", "Leopard"],
-        "answer": "Cheetah"
-    },
-    18: {
-        "question": "Which country gifted the Statue of Liberty to the USA?",
-        "options": ["France", "England", "Spain", "Germany"],
-        "answer": "France"
-    },
-    19: {
-        "question": "Which programming language is known as the 'language of the web'?",
-        "options": ["Python", "Java", "C++", "JavaScript"],
-        "answer": "JavaScript"
-    },
-    20: {
-        "question": "How many bones are in the adult human body?",
-        "options": ["206", "201", "209", "212"],
-        "answer": "206"
-    }
 }
 
 
@@ -142,13 +92,10 @@ header_label.grid(row=0, column=0, sticky="w")
 score_label = ttk.Label(header_frame, text=f"Score: {score}", font=(FONT, 14))
 score_label.grid(row=0, column=1)
 
-
-
 """
 MCQ Frame.
 GM -> Pack
 """
-
 
 # Variable to hold the current question number
 home_frame = ttk.Frame(window)
@@ -157,7 +104,6 @@ curr_frame = home_frame
 def destroy_curr_frame():
     global curr_frame
     curr_frame.destroy()
-
 
 def handle_start():
     destroy_curr_frame()
@@ -180,7 +126,7 @@ def render_questions_frame():
     mcq_frame.pack(fill="x", padx=10, pady=10, expand=True)
 
     question_dict = questions_options_dictionary[curr_que]
-    question = question_dict["question"]
+    question = f"{curr_que}. {question_dict["question"]}"
     options = question_dict["options"]
 
 
@@ -242,7 +188,6 @@ def handle_next_button():
         render_questions_frame()
     else:
         render_final_page()
-
 
 next_button = ttk.Button(footer_frame, text="NEXT", style="Custom.TButton", command=handle_next_button)
 next_button.pack(side="right")
