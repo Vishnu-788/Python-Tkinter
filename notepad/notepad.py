@@ -22,8 +22,10 @@ def create_window():
     new_window.geometry("250x150")
     return new_window
 
-def open_save_window():
+def handle_cancel(new_window):
+    new_window.destroy()
 
+def open_save_window():
     new_window = create_window()
     label = tk.Label(new_window, text="Enter the filename: ")
     label.pack(pady=10, padx=10, anchor="w")
@@ -40,9 +42,35 @@ def open_save_window():
     save_button = ttk.Button(buttons_frame, text="Save", command=lambda: handle_save(entry, new_window))
     save_button.grid(row=0, column=0, sticky="w")
 
-    cancel_button = ttk.Button(buttons_frame, text="cancel")
+    cancel_button = ttk.Button(buttons_frame, text="cancel",command=lambda: handle_cancel(new_window))
     cancel_button.grid(row=0, column=1, sticky="e")
 
+def handle_open():
+    new_window = create_window()
+
+    label = tk.Label(new_window, text="Enter the filename: ")
+    label.pack(pady=10, padx=10, anchor="w")
+
+    entry = tk.Entry(new_window)
+    entry.pack(pady=5, padx=10, fill="x")
+
+    buttons_frame = ttk.Frame(new_window)
+    buttons_frame.pack(fill="x", padx=10, pady=5)
+
+    buttons_frame.grid_columnconfigure(0, weight=1)
+    buttons_frame.grid_columnconfigure(1, weight=1)
+
+    open_button = ttk.Button(buttons_frame, text="open", command=lambda: open_file(entry, new_window))
+    open_button.grid(row=0, column=0, sticky="w")
+
+def open_file(entry, new_window):
+    file_name = entry.get()
+    new_window.destroy()
+    contents=""
+    with open(get_file_path(file_name), READ) as f1:
+        contents = f1.read()
+    text_area.delete("1.0", tk.END)
+    text_area.insert("1.0", contents)
 
 
 def handle_save(entry, new_window):
@@ -50,9 +78,6 @@ def handle_save(entry, new_window):
     save_file(get_file_path(file_name), WRITE)
     new_window.destroy()
 
-
-def handle_open():
-    pass
 
 def handle_edit():
     pass
