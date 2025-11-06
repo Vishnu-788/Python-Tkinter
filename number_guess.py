@@ -63,6 +63,4 @@ def render_success_frame():
     success_label = ttk.Label(success_frame, text="Hooray!!!", font=("Times New ROman", 24))
     success_label.pack(fill="x", expand=True)
 
-
-
 window.mainloop()
