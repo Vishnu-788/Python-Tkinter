@@ -1,9 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
 
+
 window = tk.Tk()
 window.title("Clock")
 window.geometry("600x300")
+window.resizable(False, False)
 
 main_frame = ttk.Frame(window)
 main_frame.pack(expand=True, fill="x", anchor="center")
